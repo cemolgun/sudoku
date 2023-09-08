@@ -1,0 +1,14 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "Sudoku app using ElectronJS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "cemolgun",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^26.2.0"
+  }
+}
