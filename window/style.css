@@ -1,0 +1,78 @@
+@font-face {
+    font-family: Roboto;
+    src: url(../assets/Roboto/Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: RobotoLightItalic;
+    src: url(../assets/Roboto/Roboto-LightItalic.ttf);
+}
+html[color-theme="theme"]{
+    --color-background : white;
+    --color-text : black;
+    --color-hover : gainsboro;
+    --color-select : lightgray;
+    --color-player : mediumblue;
+    --color-warn : crimson;
+}
+body{
+    user-select: none;
+    font-family: Roboto;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+}
+div{
+    box-sizing: border-box;
+}
+.header{
+    display: flex;
+    flex-wrap: wrap;
+    height: 10vh;
+}
+.header-div{
+    width: calc(100vw/3);
+}
+.header-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: RobotoLightItalic;
+    font-size: 6vh;
+}
+.game-div{
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel{
+    height: 15vh;
+}
+.bottom{
+    height: 10vh;
+}
+.board{
+    display: flex;
+    flex-wrap: wrap;
+    aspect-ratio: 1;
+    height: 98%;
+    border: 2px solid var(--color-text);
+    /*
+    background-color: var(--color-accent);
+    */
+}
+.board-sq{
+    width :calc(100%/9); /* ? 65vh / 9 = 7.22222vh but i prefer this way better */
+    height: calc(100%/9);
+    border: 1px solid var(--color-text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+}
+.board-sq:hover{
+    background-color: var(--color-hover);
+}
