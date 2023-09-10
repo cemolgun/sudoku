@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-theme="theme">
+<html lang="en" color-theme="mocha">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,17 @@
     <div class="header">
         <div class="header-div"></div>
         <div class="header-div header-text" ">Sudoku !</div>
-        <div class="header-div"></div>
+        <div class="header-div header-right">
+            <div class="dropdown">
+                <div class="drop-item head">Select Theme ▼ </div>
+                <div class="drop-hide">
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','mocha')">Mocha</div>
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','latte')">Latte</div>
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','default')">Default</div>
+                </div>
+
+            </div>
+        </div>
     </div>
     <div class="game-div">
         <div class="board"> 
