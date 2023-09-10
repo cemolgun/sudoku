@@ -11,7 +11,7 @@ html[color-theme="theme"]{
     --color-text : black;
     --color-hover : gainsboro;
     --color-select : lightgray;
-    --color-player : mediumblue;
+    --color-player : royalblue;
     --color-warn : crimson;
 }
 body{
@@ -49,7 +49,12 @@ div{
     align-items: center;
 }
 .panel{
+    display : flex;
+    flex-wrap: wrap;
+    margin-left: calc((100vw - 80vh)/2);
+    margin-right: calc((100vw - 80vh)/2);
     height: 15vh;
+    align-items: center;
 }
 .bottom{
     height: 10vh;
@@ -58,7 +63,7 @@ div{
     display: flex;
     flex-wrap: wrap;
     aspect-ratio: 1;
-    height: 98%;
+    height: 63.7vh;
     border: 2px solid var(--color-text);
     /*
     background-color: var(--color-accent);
@@ -75,4 +80,18 @@ div{
 }
 .board-sq:hover{
     background-color: var(--color-hover);
+}
+.button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6.2vh;
+    height: 8vh;
+    width: 8vh;
+    margin: auto;
+    border: 2px solid var(--color-text);
+    border-radius: 1vh;
+}
+.button:hover{
+    box-shadow: var(--color-text) 2px 2px, var(--color-text) -2px 2px, var(--color-text) -2px -2px, var(--color-text) 2px -2px;
 }
