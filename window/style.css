@@ -64,6 +64,8 @@ div{
     flex-wrap: wrap;
     height: 10vh;
     align-items: center;
+    padding-left: 25vw;
+    padding-right: 25vw;
 }
 .board{
     display: flex;

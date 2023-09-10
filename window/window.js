@@ -74,7 +74,6 @@ class Button
     }
     click()
     {
-        console.log(`Clickled ${this.num}`)
         selected_sq.update(this.num);
     }
 
@@ -97,19 +96,35 @@ for (i = 1; i<10; i++)
     button.add_to_board();
 }
 
-brk = document.createElement("div");
-brk.classList.add("break");
-panel.append(brk);
+function del()
+{
+    selected_sq.update();
+}
 
+function del_all()
+{
+    for (i = 0; i<81; i++)
+    {
+        board_sq_list[i].update();
+    }
+}
 
-del_btn = new Button();
-del_all_btn = new Button();
-submit_btn = new Button();
+document.querySelector(".del").addEventListener("click", del);
+document.querySelector(".del-all").addEventListener("click", del_all);
 
 document.addEventListener("keydown", (e)=>{
+    //console.log(e);
     if (key_num = parseInt(e.key))
     {
         console.log(key_num);
         button_list[key_num-1].click();
     }
+    else if (e.key == "Backspace" || e.key == "Delete")
+    {
+        if (e.shiftKey)
+            del_all();
+        else
+            del();
+    }
+    
 });
