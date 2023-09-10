@@ -1,3 +1,5 @@
+selected_sq = 0;
+
 board = document.querySelector(".board");
 class BoardSq
 {
@@ -5,17 +7,46 @@ class BoardSq
     {
         this.index = index;
         this.value = value;
-        this.row = index/9;
+        this.row = Math.floor(index/9);
         this.col = index%9;
         
         this.doc_sq = document.createElement("div");
         this.doc_sq.classList.add("board-sq");
         this.doc_sq.textContent = this.num;
+
+        if (this.col == 2 || this.col == 5)
+        {
+            this.doc_sq.classList.add("vertical-line-right");
+        }
+        else if (this.col == 3 || this.col == 6)
+        {
+            this.doc_sq.classList.add("vertical-line-left");
+        }
+        if (this.row == 2 || this.row == 5)
+        {
+            this.doc_sq.classList.add("horizontal-line-bottom");
+        }
+        else if (this.row == 3 || this.row == 6)
+        {
+            this.doc_sq.classList.add("horizontal-line-top");
+        }
+    }
+
+    unselect()
+    {
+        document.documentElement.removeAttribute()
     }
 
     add_to_board()
     {
         board.append(this.doc_sq);
+        this.doc_sq.addEventListener("click", ()=>{
+            if (selected_sq) 
+                selected_sq.doc_sq.setAttribute("selected-sq", false);
+
+            this.doc_sq.setAttribute("selected-sq", true);
+            selected_sq = this;
+        })
     }
 
     update(num)
@@ -44,6 +75,7 @@ class Button
     click()
     {
         console.log(`Clickled ${this.num}`)
+        selected_sq.update(this.num);
     }
 
 
@@ -64,6 +96,15 @@ for (i = 1; i<10; i++)
     button_list.push(button);
     button.add_to_board();
 }
+
+brk = document.createElement("div");
+brk.classList.add("break");
+panel.append(brk);
+
+
+del_btn = new Button();
+del_all_btn = new Button();
+submit_btn = new Button();
 
 document.addEventListener("keydown", (e)=>{
     if (key_num = parseInt(e.key))

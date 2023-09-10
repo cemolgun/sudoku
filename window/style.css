@@ -12,7 +12,10 @@ html[color-theme="theme"]{
     --color-hover : gainsboro;
     --color-select : lightgray;
     --color-player : royalblue;
-    --color-warn : crimson;
+    --color-selected: lightblue;
+    --color-gr-divider : crimson;
+    --color-warn : pink;
+    --color-nice : lightgreen;
 }
 body{
     user-select: none;
@@ -53,11 +56,14 @@ div{
     flex-wrap: wrap;
     margin-left: calc((100vw - 80vh)/2);
     margin-right: calc((100vw - 80vh)/2);
-    height: 15vh;
+    height: 10vh;
     align-items: center;
 }
 .bottom{
+    display : flex;
+    flex-wrap: wrap;
     height: 10vh;
+    align-items: center;
 }
 .board{
     display: flex;
@@ -81,6 +87,23 @@ div{
 .board-sq:hover{
     background-color: var(--color-hover);
 }
+.board-sq.vertical-line-left{
+    border-left: 2px solid var(--color-gr-divider);
+}
+.board-sq.vertical-line-right{
+    border-right: 2px solid var(--color-gr-divider);
+}
+.board-sq.horizontal-line-top{
+    border-top: 2px solid var(--color-gr-divider);
+}
+.board-sq.horizontal-line-bottom{
+    border-bottom: 2px solid var(--color-gr-divider);
+}
+.board-sq[selected-sq="true"]
+{
+    background-color: var(--color-selected);
+}
+
 .button{
     display: flex;
     align-items: center;
@@ -94,4 +117,21 @@ div{
 }
 .button:hover{
     box-shadow: var(--color-text) 2px 2px, var(--color-text) -2px 2px, var(--color-text) -2px -2px, var(--color-text) 2px -2px;
+}
+.break {
+    flex-basis: 100%;
+    height: 1vh;
+  }
+.button.func{
+    width: 16vh;
+    margin: auto;
+}
+.button.func img{
+    width: 6vh;
+}
+.del, .del-all{
+    background-color: var(--color-warn);
+}
+.submit{
+    background-color: var(--color-nice);
 }
