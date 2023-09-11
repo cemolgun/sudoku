@@ -13,7 +13,7 @@ class BoardSq
         
         this.doc_sq = document.createElement("div");
         this.doc_sq.classList.add("board-sq");
-        this.doc_sq.textContent = this.num;
+        this.doc_sq.textContent = this.value;
 
         if (this.col == 2 || this.col == 5)
         {
@@ -50,17 +50,17 @@ class BoardSq
         })
     }
 
-    update(num)
+    update(value)
     {
         if (this.set_by_pc)
             return;
-        this.num = num;
-        this.doc_sq.textContent = this.num;
+        this.value = value;
+        this.doc_sq.textContent = this.value;
     }
 
-    set_square(num)
+    set_square(value)
     {
-        this.update(num);
+        this.update(value);
         this.set_by_pc = true;
         this.doc_sq.classList.add("set-by-pc");
     }
@@ -93,7 +93,7 @@ class Button
 board_sq_list = [];
 for (i = 0; i<81; i++)
 {
-    sq = new BoardSq(i);
+    sq = new BoardSq(i,i);
     board_sq_list.push(sq);
     sq.add_to_board();
 }
