@@ -5,6 +5,7 @@ class BoardSq
 {
     constructor(index, value)
     {
+        this.set_by_pc = false;
         this.index = index;
         this.value = value;
         this.row = Math.floor(index/9);
@@ -51,8 +52,17 @@ class BoardSq
 
     update(num)
     {
+        if (this.set_by_pc)
+            return;
         this.num = num;
         this.doc_sq.textContent = this.num;
+    }
+
+    set_square(num)
+    {
+        this.update(num);
+        this.set_by_pc = true;
+        this.doc_sq.classList.add("set-by-pc");
     }
 
 }

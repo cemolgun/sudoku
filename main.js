@@ -6,7 +6,8 @@ const create_window = () => {
         width: 480,
         height: 480,
         title: "Sudoku",
-        maximizable : false // doesn't work on linux..
+        maximizable : false, // doesn't work on linux..
+        icon : "./assets/icon.png"
     });
     window.loadFile("./window/window.html");
     window.setAspectRatio(1);

@@ -104,6 +104,10 @@ div{
     justify-content: center;
     align-items: center;
     font-size: 5vh;
+    color: var(--color-player);
+}
+.board-sq.set-by-pc{
+    color:  var(--color-text);
 }
 .board-sq:hover{
     background-color: var(--color-hover);
