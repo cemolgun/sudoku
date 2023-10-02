@@ -1,3 +1,10 @@
+const electron = require("electron");
+const { ipcRenderer } = electron;
+
+given_board = "";
+
+ipcRenderer.on("board", (e, data) => {alert(data)});
+
 selected_sq = 0;
 
 board = document.querySelector(".board");

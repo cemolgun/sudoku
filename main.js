@@ -1,11 +1,5 @@
-const { app, BrowserWindow, Menu}  = require('electron');
+const { app, BrowserWindow, Menu, ipcMain }  = require('electron');
 const { spawn } = require('child_process');
-
-function get_new_board()
-{
-    const solver = spawn("./solver", ["new", 0 , Math.floor(Math.random()*2e10)]);
-    solver.stdout.on("data", (data) => {console.log(data.toString())})
-}
 
 const create_window = () => {
 
@@ -14,7 +8,11 @@ const create_window = () => {
         height: 480,
         title: "Sudoku",
         maximizable : false, // doesn't work on linux..
-        icon : "./assets/icon.png"
+        icon : "./assets/icon.png",
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+        }
     });
     window.loadFile("./window/window.html");
     window.setAspectRatio(1);
@@ -23,11 +21,18 @@ const create_window = () => {
     app_menu = Menu.buildFromTemplate(menu_template);
     Menu.setApplicationMenu(app_menu);
 
-    get_new_board();
+    function get_new_board()
+    {
+        brd = "";
+        const solver = spawn("./solver", [0,0]);
+        solver.stdout.on("data", (data) => {
+            window.webContents.send("board", data.toString());
+        });
+    }
 
+    get_new_board();
 }
 
 app.whenReady().then(() => {
     create_window();
 });
-
