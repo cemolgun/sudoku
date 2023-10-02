@@ -1,4 +1,11 @@
 const { app, BrowserWindow, Menu}  = require('electron');
+const { spawn } = require('child_process');
+
+function get_new_board()
+{
+    const solver = spawn("./solver", ["new", 0 , Math.floor(Math.random()*2e10)]);
+    solver.stdout.on("data", (data) => {console.log(data.toString())})
+}
 
 const create_window = () => {
 
@@ -16,8 +23,11 @@ const create_window = () => {
     app_menu = Menu.buildFromTemplate(menu_template);
     Menu.setApplicationMenu(app_menu);
 
+    get_new_board();
+
 }
 
 app.whenReady().then(() => {
     create_window();
 });
+

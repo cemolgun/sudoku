@@ -2,10 +2,11 @@
 #include <stdbool.h>
 #include <time.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 char* empty = "000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 
-typedef struct 
+typedef struct
 {
     uint8_t col;
     uint8_t row;
@@ -21,10 +22,10 @@ typedef struct
     Sq* groups[9][9];
 } Board;
 
-#include <stdio.h>
-void print_sq(Sq sq)
+void print_board(Board* board)
 {
-    printf("Col: %d\nRow: %d\nGroup: %d\nNumber: %d",sq.col, sq.row, sq.gr, sq.num);
+    for (uint8_t i = 0; i<81; i++)
+        printf("%d", board->squares[i].num);
 }
 
 bool append_sq(Sq* arr[9], Sq* sq)
@@ -61,7 +62,7 @@ void generate_board(Board* board)
             squares->row = rw;
             /* squares->num = 0;    Everything is already set to 0 on board initialization */
 
-            uint8_t gr = 3*(rw/3)+ cl/3;;
+            uint8_t gr = 3*(rw/3)+ cl/3;
             squares->gr =  gr;
 
             append_sq(board->rows[rw], squares);
@@ -174,7 +175,6 @@ bool check(Board* board)
 
 void create_new(Board* board)
 {
-
     /*
         * Creates a new solved board.
         * Assigns random numbers from possible nums array.
@@ -200,35 +200,19 @@ void create_new(Board* board)
         else
             board->squares[i].num = possible_nums.arr[rand()%possible_nums.qty];
     }
-
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board */
 {
     int seed;
-    if (argv[1])
-        seed = atoi(argv[1]);
-    else
-        seed = time(NULL);
-
+    seed = time(NULL);
     srand(seed);
 
     Board board = {0};
     generate_board(&board);
     
     create_new(&board);
-
-    printf("\n\n");
-    printf("%d", check(&board));
-    printf("\n\n");
-
-    board.squares[74].num = 0;
-
-    for (int i = 0; i < 81; i++)
-    {
-        printf("%d", board.squares[i].num);
-    }
-    printf("\n\n");
-    printf("%d", check(&board));
+    print_board(&board);
+    printf("%s", argv[3]);
 
 }
