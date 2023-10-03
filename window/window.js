@@ -73,7 +73,7 @@ class Button
 {
     constructor(num)
     {
-        this.num = num;
+        this.num = num.toString();
         this.doc_button = document.createElement("div");
         this.doc_button.classList.add("button");
         this.doc_button.textContent = this.num;
@@ -120,8 +120,26 @@ function del_all()
     }
 }
 
+function submit()
+{
+    check_string = "";
+    for (i = 0; i<81; i++)
+        if (board_sq_list[i].value)
+            check_string += board_sq_list[i].value;
+        else
+            check_string += "0";
+    
+    ipcRenderer.send("submit", check_string);
+    ipcRenderer.on("submit", (e, data) => {
+        alert(data);
+        ipcRenderer.removeListener("submit");
+    });
+}
+
 document.querySelector(".del").addEventListener("click", del);
 document.querySelector(".del-all").addEventListener("click", del_all);
+document.querySelector(".submit").addEventListener("click", submit);
+
 
 document.addEventListener("keydown", (e)=>{
     //console.log(e);

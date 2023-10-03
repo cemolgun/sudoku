@@ -30,12 +30,24 @@ const create_window = () => {
         });
     }
 
+    function check_board(board)
+    {
+        const checker = spawn("./solver", ["check", board]);
+        checker.stdout.on("data", (data) => {
+            console.log(data.toString());
+            window.webContents.send("submit", data.toString());
+        });
+    }
+
     ipcMain.on("send_board", (e, data) => {
         if (data)
-        {
             get_new_board();
-        }
     })
+
+    ipcMain.on("submit", (e, data) => {
+        check_board(data);
+    })
+
 }
 
 app.whenReady().then(() => {
