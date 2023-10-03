@@ -24,13 +24,18 @@ const create_window = () => {
     function get_new_board()
     {
         brd = "";
-        const solver = spawn("./solver", [0,0]);
+        const solver = spawn("./solver", ["new",0]);
         solver.stdout.on("data", (data) => {
-            window.webContents.send("board", data.toString());
+            window.webContents.send("send_board", data.toString());
         });
     }
 
-    get_new_board();
+    ipcMain.on("send_board", (e, data) => {
+        if (data)
+        {
+            get_new_board();
+        }
+    })
 }
 
 app.whenReady().then(() => {

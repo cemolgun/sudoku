@@ -1,10 +1,6 @@
 const electron = require("electron");
 const { ipcRenderer } = electron;
 
-given_board = "";
-
-ipcRenderer.on("board", (e, data) => {alert(data)});
-
 selected_sq = 0;
 
 board = document.querySelector(".board");
@@ -40,11 +36,6 @@ class BoardSq
         }
     }
 
-    unselect()
-    {
-        document.documentElement.removeAttribute()
-    }
-
     add_to_board()
     {
         board.append(this.doc_sq);
@@ -67,9 +58,12 @@ class BoardSq
 
     set_square(value)
     {
-        this.update(value);
-        this.set_by_pc = true;
-        this.doc_sq.classList.add("set-by-pc");
+        if (value != "0")
+        {
+            this.update(value);
+            this.set_by_pc = true;
+            this.doc_sq.classList.add("set-by-pc");
+        }
     }
 
 }
@@ -100,7 +94,7 @@ class Button
 board_sq_list = [];
 for (i = 0; i<81; i++)
 {
-    sq = new BoardSq(i,i);
+    sq = new BoardSq(i);
     board_sq_list.push(sq);
     sq.add_to_board();
 }
@@ -144,4 +138,10 @@ document.addEventListener("keydown", (e)=>{
             del();
     }
     
+});
+
+ipcRenderer.send("send_board", "send_board");
+ipcRenderer.on("send_board", (e, data) => {
+    for (i = 0; i < 81; i++)
+        board_sq_list[i].set_square(data[i]);
 });

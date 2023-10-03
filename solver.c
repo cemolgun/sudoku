@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 char* empty = "000000000000000000000000000000000000000000000000000000000000000000000000000000000";
 
@@ -202,6 +203,19 @@ void create_new(Board* board)
     }
 }
 
+void erase_some_squares(Board* board, char* difficulty) /* Could be way more complex but does the job */
+{
+    int diff = atoi(difficulty);
+    for (uint8_t i = 0; i<diff; i++)
+    {
+        int r = rand()%81;
+        if (!board->squares[r].num)
+            i--;
+        else
+            board->squares[r].num = 0;
+    }
+}
+
 int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board */
 {
     int seed;
@@ -211,8 +225,20 @@ int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board */
     Board board = {0};
     generate_board(&board);
     
-    create_new(&board);
-    print_board(&board);
-    printf("%s", argv[3]);
+    if (!strcmp(argv[1], "new")) /* strcmp returns 0 if both strings are identical */
+    {
+        create_new(&board);
+        erase_some_squares(&board, "35");
+        
+        print_board(&board);
+    }
 
+    else if (!strcmp(argv[1], "check"))
+    {
+        fill_board(&board, argv[2]);
+        if (check(&board))
+            printf("true");
+        else
+            printf("false");
+    }
 }
