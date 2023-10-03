@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="result">
+        Incorrect
+    </div>
     <div class="header">
         <div class="header-div"></div>
         <div class="header-div header-text">Sudoku !</div>
@@ -14,9 +17,9 @@
             <div class="dropdown">
                 <div class="drop-item head">Select Theme ▼ </div>
                 <div class="drop-hide">
-                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','mocha')">Mocha</div>
-                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','latte')">Latte</div>
-                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','default')">Default</div>
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','mocha'); current_theme = 'mocha'">Mocha</div>
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','latte'); current_theme = 'latte'">Latte</div>
+                    <div class="drop-item list" onclick="document.documentElement.setAttribute('color-theme','default'); current_theme = 'default'">Default</div>
                 </div>
 
             </div>

@@ -131,8 +131,18 @@ function submit()
     
     ipcRenderer.send("submit", check_string);
     ipcRenderer.on("submit", (e, data) => {
-        alert(data);
-        ipcRenderer.removeListener("submit");
+        if (data == "true")
+        {
+            document.querySelector(".result").textContent = "Correct";
+            document.querySelector(".result").style = "visibility: visible";
+            ipcRenderer.removeListener("submit");
+        }
+        if (data == "false")
+        {
+            document.querySelector(".result").textContent = "Incorrect";
+            document.querySelector(".result").style = "visibility: visible";
+            ipcRenderer.removeListener("submit");
+        }
     });
 }
 
@@ -142,7 +152,6 @@ document.querySelector(".submit").addEventListener("click", submit);
 
 
 document.addEventListener("keydown", (e)=>{
-    //console.log(e);
     if (key_num = parseInt(e.key))
     {
         console.log(key_num);
@@ -157,6 +166,8 @@ document.addEventListener("keydown", (e)=>{
     }
     
 });
+
+document.addEventListener("click", (e)=>{document.querySelector(".result").style = "visibility: hidden";})
 
 ipcRenderer.send("send_board", "send_board");
 ipcRenderer.on("send_board", (e, data) => {
