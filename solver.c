@@ -216,7 +216,7 @@ void erase_some_squares(Board* board, char* difficulty) /* Could be way more com
     }
 }
 
-int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board */
+int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board, argv[3] difficulty */
 {
     int seed;
     seed = time(NULL);
@@ -228,7 +228,7 @@ int main(int argc, char* argv[]) /* argv[1] => mode, argv[2] => given board */
     if (!strcmp(argv[1], "new")) /* strcmp returns 0 if both strings are identical */
     {
         create_new(&board);
-        erase_some_squares(&board, "1");
+        erase_some_squares(&board, argv[3]);
         
         print_board(&board);
     }
